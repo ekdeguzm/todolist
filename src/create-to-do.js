@@ -7,8 +7,6 @@ import './style.css';
 // Call blankProjectLoad on first land
 blankProjectLoad();
 
-// TODO: Come back to this call if I build out this feature in the future
-// Call DOM Manipulation module to load default project
 //displayDefaultProject();
 
 // Call displayToDo on first land - pulls from web local storage API (if any)

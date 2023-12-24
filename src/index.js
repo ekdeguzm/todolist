@@ -1,22 +1,36 @@
-import _ from 'lodash';
+import { createToDo } from './create-to-do.js';
+import { blankProjectLoad } from './blank-project-load.js';
+import { displayDefaultProject, displayTheForm, addItemToCheckList, clearForm, displayToDo } from './dom-manip.js'
+import './style.css';
 
 
-// testing out webpack initial setup of index.js
-console.log("testing index.js webpack")
+// Call blankProjectLoad on first land
+blankProjectLoad();
 
-// testing out DOM manipulation via webpack
-const contentDiv = document.querySelector(".content");
-const testH1 = document.createElement("h1");
-testH1.textContent = "HELLO WORLD... TEST FROM WEBPACK INDEX.JS DOM MANIPULATON"
-contentDiv.appendChild(testH1);
+// TODO: Come back to this call if I build out this feature in the future
+// Call DOM Manipulation module to load default project
+//displayDefaultProject();
 
-function component() {
-  const element = document.createElement('div');
+// Call displayToDo on first land - pulls from web local storage API (if any)
+displayToDo();
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+// Click events module
+let clickEventsModule = (function() {
 
-  return element;
-}
+    // Click event for displaying the form
+    const addNewToDo = document.querySelector(".add-todo-button");
+    addNewToDo.addEventListener("click", displayTheForm);
 
-document.body.appendChild(component());
+    // Click event for adding an item to the checklist on the form
+    const addToChecklist = document.querySelector(".add-to-checklist");
+    addToChecklist.addEventListener("click", addItemToCheckList);
+
+    // Click event to clear the form
+    const clearButton = document.querySelector(".reset-button");
+    clearButton.addEventListener("click", clearForm);
+
+    // Click event to submit a new todo form to project
+    const submitButton = document.querySelector(".submit-button");
+    submitButton.addEventListener("click", createToDo);
+    
+})();
